@@ -61,7 +61,7 @@ ninja
 strip shimgvw.exe
 ```
 
-Tested on RosBE, Visual Studio 2015, and Visual Studio 2019.
+Tested on RosBE and MinGW.
 
 ## License
 
