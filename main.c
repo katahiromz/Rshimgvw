@@ -25,7 +25,7 @@ INT SHIMGVW_main(INT argc, LPWSTR *argv)
             L"PNG (*.png)\0*.png\0"
             L"GIF (*.gif)\0*.gif\0"
             L"TIFF (*.tif;*.tiff)\0*.tif;*.tiff\0"
-            L"Bitmap Files (*.bmp;*.dib)\0*.bmp;*.dib\0";
+            L"Bitmap Files (*.bmp;*.dib;*.rle)\0*.bmp;*.dib;*.rle\0";
         ofn.lpstrFile = szFile;
         ofn.nMaxFile = _countof(szFile);
         ofn.lpstrTitle = L"Open Image File";
