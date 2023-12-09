@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <commdlg.h>
 
-extern HINSTANCE hInstance;
+extern HINSTANCE g_hInstance;
 
 LONG WINAPI
 ImageView_CreateWindow(HWND hwnd, LPCWSTR szFileName);
@@ -42,14 +42,14 @@ INT SHIMGVW_main(INT argc, LPWSTR *argv)
 }
 
 INT WINAPI
-WinMain(HINSTANCE  hInst,
-         HINSTANCE hPrevInst,
+WinMain(HINSTANCE  hInstance,
+         HINSTANCE hPrevInstance,
          LPSTR     lpCmdLine,
          INT       nCmdShow)
 {
     INT argc;
     LPWSTR *argv = CommandLineToArgvW(GetCommandLineW(), &argc);
-    hInstance = hInst;
+    g_hInstance = hInstance;
     INT ret = SHIMGVW_main(argc, argv);
     LocalFree(argv);
     return ret;
