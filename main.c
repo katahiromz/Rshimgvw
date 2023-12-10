@@ -3,10 +3,9 @@
 
 extern HINSTANCE g_hInstance;
 
-LONG WINAPI
-ImageView_CreateWindow(HWND hwnd, LPCWSTR szFileName);
+LONG ImageView_Main(HWND hwnd, LPCWSTR szFileName);
 
-INT SHIMGVW_main(INT argc, LPWSTR *argv)
+INT SHIMGVW_Main(INT argc, LPWSTR *argv)
 {
     if (3 <= argc)
     {
@@ -14,31 +13,10 @@ INT SHIMGVW_main(INT argc, LPWSTR *argv)
         return 1;
     }
 
-    LPWSTR filename = argv[1];
-    WCHAR szFile[MAX_PATH] = { 0 };
-    if (argc <= 1)
-    {
-        OPENFILENAMEW ofn = { sizeof(ofn) };
-        ofn.lpstrFilter =
-            L"Supported Image Files\0*.jpg;*.jpeg;*.jpe;*.jfif;*.png;*.gif;*.tif;*.tiff;*.bmp;*.dib\0"
-            L"JPEG (*.jpg;*.jpeg;*.jpe;*.jfif)\0*.jpg;*.jpeg;*.jpe;*.jfif\0"
-            L"PNG (*.png)\0*.png\0"
-            L"GIF (*.gif)\0*.gif\0"
-            L"TIFF (*.tif;*.tiff)\0*.tif;*.tiff\0"
-            L"Bitmap Files (*.bmp;*.dib;*.rle)\0*.bmp;*.dib;*.rle\0";
-        ofn.lpstrFile = szFile;
-        ofn.nMaxFile = _countof(szFile);
-        ofn.lpstrTitle = L"Open Image File";
-        ofn.Flags = OFN_EXPLORER | OFN_HIDEREADONLY | OFN_ENABLESIZING;
-        ofn.lpstrDefExt = L"png";
-        if (!GetOpenFileName(&ofn))
-            return 0;
+    if (argc == 1)
+        return ImageView_Main(NULL, NULL);
 
-        filename = szFile;
-    }
-
-    ImageView_CreateWindow(NULL, filename);
-    return 0;
+    return ImageView_Main(NULL, argv[1]);
 }
 
 INT WINAPI
@@ -50,7 +28,7 @@ WinMain(HINSTANCE  hInstance,
     INT argc;
     LPWSTR *argv = CommandLineToArgvW(GetCommandLineW(), &argc);
     g_hInstance = hInstance;
-    INT ret = SHIMGVW_main(argc, argv);
+    INT ret = SHIMGVW_Main(argc, argv);
     LocalFree(argv);
     return ret;
 }

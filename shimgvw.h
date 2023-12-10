@@ -25,6 +25,7 @@
 #endif
 #include <objbase.h>
 #include <gdiplus.h>
+#include <shlwapi.h>
 #include <strsafe.h>
 
 #define NDEBUG
@@ -55,7 +56,7 @@ typedef struct tagSHIMGVW_FILENODE
     struct tagSHIMGVW_FILENODE *Next;
 } SHIMGVW_FILENODE;
 
-#define WC_SHIMGVW L"ShImgVw:CPreviewWnd"
+#define WC_PREVIEW L"ShImgVw:CPreviewWnd"
 
 /* Animation */
 typedef struct tagANIME
@@ -72,8 +73,6 @@ void Anime_FreeInfo(PANIME pAnime);
 BOOL Anime_LoadInfo(PANIME pAnime);
 void Anime_SetTimerWnd(PANIME pAnime, HWND hwndTimer);
 void Anime_SetFrameIndex(PANIME pAnime, UINT nFrameIndex);
-DWORD Anime_GetFrameDelay(PANIME pAnime, UINT nFrameIndex);
 void Anime_Start(PANIME pAnime, DWORD dwDelay);
 void Anime_Pause(PANIME pAnime);
-BOOL Anime_Step(PANIME pAnime, DWORD *pdwDelay);
 BOOL Anime_OnTimer(PANIME pAnime, WPARAM wParam);
