@@ -1,8 +1,8 @@
-In shimgvw.c:
+In shimgvw.h:
 
  #include <wincon.h>
 +#ifdef __RSHIMGVW__
 +#include <winuser.h>
 +#include <winnetwk.h>
 +#endif
- #include <windowsx.h>
+ #include <objbase.h>

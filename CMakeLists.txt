@@ -21,6 +21,7 @@ endif()
 # shimgvw.exe
 
 add_executable(shimgvw WIN32
+    anime.c
     shimgvw.c
     main.c
     shimgvw.rc)
