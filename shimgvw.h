@@ -33,11 +33,7 @@
 
 #include "resource.h"
 
-#define TB_IMAGE_WIDTH  16
-#define TB_IMAGE_HEIGHT 16
-
 extern HINSTANCE g_hInstance;
-extern HWND g_hDispWnd;
 extern GpImage *g_pImage;
 
 typedef struct
@@ -76,3 +72,13 @@ void Anime_SetFrameIndex(PANIME pAnime, UINT nFrameIndex);
 void Anime_Start(PANIME pAnime, DWORD dwDelay);
 void Anime_Pause(PANIME pAnime);
 BOOL Anime_OnTimer(PANIME pAnime, WPARAM wParam);
+
+static inline LPVOID QuickAlloc(SIZE_T cbSize, BOOL bZero)
+{
+    return HeapAlloc(GetProcessHeap(), (bZero ? HEAP_ZERO_MEMORY : 0), cbSize);
+}
+
+static inline VOID QuickFree(LPVOID ptr)
+{
+    HeapFree(GetProcessHeap(), 0, ptr);
+}
