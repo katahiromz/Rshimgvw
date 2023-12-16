@@ -53,6 +53,7 @@ typedef struct tagSHIMGVW_FILENODE
 } SHIMGVW_FILENODE;
 
 #define WC_PREVIEW L"ShImgVw:CPreviewWnd"
+#define WC_ZOOM L"ShImgVw:CZoomWnd"
 
 /* Animation */
 typedef struct tagANIME
