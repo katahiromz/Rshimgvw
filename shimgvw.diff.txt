@@ -1,8 +1,32 @@
 In shimgvw.h:
-
+-----------
  #include <wincon.h>
 +#ifdef __RSHIMGVW__
 +#include <winuser.h>
 +#include <winnetwk.h>
 +#endif
  #include <objbase.h>
+ #include <gdiplus.h>
+ #include <shlwapi.h>
+ #include <strsafe.h>
++#ifdef __RSHIMGVW__
++typedef IStream* (WINAPI *FN_SHCreateMemStream)(const BYTE *lpbData, UINT dwDataLen);
++#endif
+ 
+ #include <debug.h>
+-----------
+In shimgvw.c:
+-----------
+     CloseHandle(hFile);
++#ifdef __RSHIMGVW__
++    {
++        HINSTANCE hSHLWAPI = LoadLibraryA("shlwapi");
++        FN_SHCreateMemStream fn = (FN_SHCreateMemStream)GetProcAddress(hSHLWAPI, MAKEINTRESOURCEA(12));
++        pStream = fn(pbMemFile, dwFileSize);
++        FreeLibrary(hSHLWAPI);
++    }
++#else
+     pStream = SHCreateMemStream(pbMemFile, dwFileSize);
++#endif
+     QuickFree(pbMemFile);
+-----------

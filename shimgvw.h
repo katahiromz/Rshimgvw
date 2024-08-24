@@ -27,6 +27,9 @@
 #include <gdiplus.h>
 #include <shlwapi.h>
 #include <strsafe.h>
+#ifdef __RSHIMGVW__
+typedef IStream* (WINAPI *FN_SHCreateMemStream)(const BYTE *lpbData, UINT dwDataLen);
+#endif
 
 #include <debug.h>
 
